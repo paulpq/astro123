@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajută Moldova să Ajungă la Stele — IOAA 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 4rem 1rem 2rem 1rem;
+            background: linear-gradient(180deg, rgba(20, 30, 48, 0.9) 60%, rgba(9, 10, 15, 0.7) 100%);
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 16px #6dd5fa, 0 0 32px #2193b0;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .donate-btn {
+            background: linear-gradient(90deg, #6dd5fa 0%, #2193b0 100%);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 16px #2193b0;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .donate-btn:hover {
+            background: linear-gradient(90deg, #2193b0 0%, #6dd5fa 100%);
+            transform: scale(1.05);
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem 4rem 1rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            background: rgba(20, 30, 48, 0.7);
+            border-radius: 18px;
+            box-shadow: 0 0 24px 0 rgba(33, 147, 176, 0.15);
+            padding: 2rem 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #6dd5fa;
+            text-shadow: 0 0 8px #2193b0;
+        }
+
+        .icon-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-col {
+            flex: 1 1 180px;
+            min-width: 160px;
+            max-width: 220px;
+            text-align: center;
+        }
+
+        .icon-col svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 8px #6dd5fa);
+        }
+
+        .progress-bar-wrap {
+            background: #222b3a;
+            border-radius: 16px;
+            padding: 1rem;
+            margin: 2rem 0 1rem 0;
+            box-shadow: 0 0 12px #2193b0;
+        }
+
+        .progress-bar {
+            background: #111a2b;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 28px;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress {
+            background: linear-gradient(90deg, #6dd5fa 0%, #2193b0 100%);
+            height: 100%;
+            width: 37%;
+            /* Example: 3700 EUR out of 10,000 EUR */
+            min-width: 5%;
+            border-radius: 12px 0 0 12px;
+            box-shadow: 0 0 16px #6dd5fa;
+            transition: width 1s;
+        }
+
+        .progress-label {
+            text-align: right;
+            font-size: 1rem;
+            color: #6dd5fa;
+            font-weight: bold;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(.77, 0, .18, 1);
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .carousel-img {
+            width: 240px;
+            height: 240px;
+            border-radius: 10px;
+            /* Slightly rounded corners for a photo look */
+            object-fit: cover;
+            border: 3px solid #6dd5fa;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 16px #2193b0;
+            background: #222b3a;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .carousel-btn {
+            background: none;
+            border: none;
+            color: #6dd5fa;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .carousel-btn:hover {
+            color: #fff;
+        }
+
+        .insta-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .insta-section a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(90deg, #6dd5fa 0%, #2193b0 100%);
+            padding: 0.5rem 1.2rem;
+            border-radius: 24px;
+            box-shadow: 0 0 8px #2193b0;
+            transition: background 0.3s;
+        }
+
+        .insta-section a:hover {
+            background: linear-gradient(90deg, #2193b0 0%, #6dd5fa 100%);
+        }
+
+        .share-message {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: #6dd5fa;
+            text-shadow: 0 0 8px #2193b0;
+        }
+
+        @media (max-width: 700px) {
+            .icon-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            section {
+                padding: 1.2rem 0.5rem;
+            }
+
+            .carousel-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas class="stars"></canvas>
+    <header>
+        <div class="hero-title">Ajută Echipa de Astronomie a Moldovei să Ajungă la Stele — Susține IOAA 2025</div>
+        <div class="hero-desc">
+            Suntem Asociația de Astronomie și Astrofizică a Republicii Moldova — o echipă pasionată de profesori,
+            cercetători și voluntari dedicați formării celor mai străluciți tineri din Moldova în științele
+            spațiale.<br><br>
+            Astronomia nu este predată în școlile din Moldova, dar elevii noștri excelează datorită eforturilor de la
+            firul ierbii, mentoratului și olimpiadelor naționale.
+        </div>
+        <button class="donate-btn"
+            onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">Donează</button>
+    </header>
+    <main>
+        <section>
+            <div class="section-title">Despre Olimpiade</div>
+            <div class="icon-row">
+                <div class="icon-col">
+                    <svg fill="none" viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="20" stroke="#6dd5fa" stroke-width="3" />
+                        <circle cx="24" cy="24" r="6" fill="#6dd5fa" />
+                    </svg>
+                    <div>18–25 octombrie<br>IOAAjr România</div>
+                </div>
+                <div class="icon-col">
+                    <svg fill="none" viewBox="0 0 48 48">
+                        <ellipse cx="24" cy="24" rx="20" ry="12" stroke="#6dd5fa" stroke-width="3" />
+                        <circle cx="24" cy="24" r="6" fill="#6dd5fa" />
+                    </svg>
+                    <div>11–21 august<br>IOAA India</div>
+                </div>
+                <div class="icon-col">
+                    <svg fill="none" viewBox="0 0 48 48">
+                        <path d="M24 4 L28 20 L44 20 L30 28 L34 44 L24 34 L14 44 L18 28 L4 20 L20 20 Z" stroke="#6dd5fa"
+                            stroke-width="2" fill="none" />
+                        <circle cx="24" cy="24" r="4" fill="#6dd5fa" />
+                    </svg>
+                    <div>3 echipe, 15 elevi, 6 mentori</div>
+                </div>
+            </div>
+            <div style="margin-top:1rem; text-align:center;">Asta înseamnă trei echipe, cincisprezece elevi excepționali
+                și șase mentori — gata să strălucească pe scena mondială.<br>Dar nu putem reuși fără tine.</div>
+        </section>
+        <section>
+            <div class="section-title">De ce avem nevoie de tine</div>
+            <div class="icon-row">
+                <div class="icon-col">
+                    <svg fill="none" viewBox="0 0 48 48">
+                        <rect x="8" y="16" width="32" height="16" rx="8" stroke="#6dd5fa" stroke-width="3" />
+                        <rect x="20" y="20" width="8" height="8" rx="4" fill="#6dd5fa" />
+                    </svg>
+                    <div>Moldova — mică, dar plină de talent</div>
+                </div>
+                <div class="icon-col">
+                    <svg fill="none" viewBox="0 0 48 48">
+                        <path d="M8 40 L40 8" stroke="#6dd5fa" stroke-width="3" />
+                        <circle cx="40" cy="8" r="4" fill="#6dd5fa" />
+                        <circle cx="8" cy="40" r="4" fill="#6dd5fa" />
+                    </svg>
+                    <div>Fără finanțare publică<br>Totul depinde de voluntari și donatori</div>
+                </div>
+                <div class="icon-col">
+                    <svg fill="none" viewBox="0 0 48 48">
+                        <rect x="12" y="12" width="24" height="24" rx="12" stroke="#6dd5fa" stroke-width="3" />
+                        <path d="M24 16v8l6 6" stroke="#6dd5fa" stroke-width="3" />
+                    </svg>
+                    <div>Oferă șansa de a visa oricărui copil pasionat</div>
+                </div>
+            </div>
+            <div style="margin-top:1rem; text-align:center;">Toate cele trei delegații s-au calificat prin Olimpiada
+                Națională de Astronomie și Astrofizică — o inițiativă 100% grassroots, organizată de profesori și
+                elevi.<br><br>Nu este vorba doar despre medalii. Este vorba despre a oferi șansa de a visa — și de a
+                zbura — oricărui copil pasionat.</div>
+        </section>
+        <section>
+            <div class="section-title">Obiectiv: 10.000 €</div>
+            <div id="donation-progress" style="max-width: 500px; margin: 20px auto;">
+                <div id="donation-label" style="font-size: 1.2em; margin-bottom: 5px; color: white;">
+                    Loading progress...
+                </div>
+                <div style="background: #333; height: 25px; border-radius: 10px; overflow: hidden;">
+                    <div id="progress-bar"
+                        style="height: 100%; width: 0%; background: linear-gradient(to right, #00c6ff, #0072ff); transition: width 0.5s;">
+                    </div>
+                </div>
+            </div>
+            <ul style="max-width:600px;margin:0 auto 1rem auto;list-style:square inside;color:#6dd5fa;">
+                <li>Transportul în România și India</li>
+                <li>Vize și taxe de participare</li>
+                <li>Suport pentru 15 elevi și 6 mentori</li>
+                <li>Logistica: cazare, mese, materiale</li>
+            </ul>
+            <div style="text-align:center;">Fiecare donație contează.</div>
+        </section>
+        <section>
+            <div class="section-title">Elevii Noștri</div>
+            <div style="text-align:center; margin-bottom:1rem;">Mulți sunt autodidacți. Unii au învățat astronomia din
+                manuale vechi și YouTube. Cei mai mulți n-au avut acces la laboratoare reale. Și totuși, au ajuns la
+                nivel internațional.</div>
+            <div class="carousel" id="carousel">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-item">
+                        <img src="../images/vlad.jpg" alt="Vladislav Smochină" class="carousel-img">
+                        <div style="font-weight:bold; font-size:1.1rem;">Vladislav Smochină</div>
+                        <div>Medalie de bronz – IOAAjr 2023<br>Argint – Olimpiada Balcanică de Fizică 2025<br>Câștigător
+                            Absolut – Olimpiada Națională de Astronomie 2025</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../images/victor.jpg" alt="Victor Sandu" class="carousel-img">
+                        <div style="font-weight:bold; font-size:1.1rem;">Victor Sandu</div>
+                        <div>Bronz – Olimpiada Europeană de Fizică 2025<br>Argint – Olimpiada Balcanică de Fizică
+                            2025<br>Argint – Olimpiada Română de Astronomie 2025</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../images/bogdan.jpg" alt="Bogdan Leahu" class="carousel-img">
+                        <div style="font-weight:bold; font-size:1.1rem;">Bogdan Leahu</div>
+                        <div>Dublu Medaliat cu Bronz – Olimpiada Internațională de Științe pentru Juniori<br>Câștigător
+                            Absolut – Olimpiada Națională de Astronomie pentru Juniori</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../images/daria.jpg" alt="Daria Boguș" class="carousel-img">
+                        <div style="font-weight:bold; font-size:1.1rem;">Daria Boguș</div>
+                        <div>Bronz – Olimpiada Internațională de Științe pentru Juniori<br>Aur – Olimpiada Națională de
+                            Astronomie pentru Juniori</div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="carousel-prev">&#8592;</button>
+                    <button class="carousel-btn" id="carousel-next">&#8594;</button>
+                </div>
+                <div style="text-align:center; color:#6dd5fa; margin-top:0.5rem;">...și încă unsprezece adolescenți
+                    inspirați — viitori oameni de știință, ingineri și exploratori.</div>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">Istoric</div>
+            <ul style="max-width:600px;margin:0 auto 1rem auto;list-style:square inside;color:#6dd5fa;">
+                <li>2022 – Prima participare la IOAAjr: trei mențiuni</li>
+                <li>2023 – Prima medalie: Bronz</li>
+                <li>2025 – Prima echipă de seniori, participare extinsă la juniori</li>
+            </ul>
+            <div style="text-align:center;">Construim asta de la zero. Ajută-ne să visăm mai departe.</div>
+        </section>
+        <section>
+            <div class="section-title">Mărturie</div>
+            <blockquote
+                style="font-style:italic; color:#fff; background:rgba(33,147,176,0.15); border-left:4px solid #6dd5fa; padding:1rem 1.5rem; border-radius:12px; max-width:700px; margin:0 auto;">
+                „Primul meu IOAAjr, în 2022, mi-a schimbat viața. Mi-a arătat frumusețea Universului, mi-a oferit
+                prietenii pe viață și m-a împins să visez mai sus ca niciodată. Fiecare elev pasionat din Moldova merită
+                această șansă.”<br>
+                <span style="font-weight:bold; color:#6dd5fa;">— Vladislav, medalist IOAAjr și participant IOAA
+                    2025</span>
+            </blockquote>
+            <div style="text-align:center; margin-top:1rem;">În Moldova, știința nu este un dat. Este o luptă.<br>Se
+                face după școală, după muncă, cu cărți împrumutate și echipamente vechi. Dar pasiunea acestor copii e
+                reală. Ajută-ne să le oferim cerul.</div>
+        </section>
+        <section>
+            <div class="section-title">Termene limită</div>
+            <div class="icon-row">
+                <div class="icon-col">
+                    <img src="../images/ioaa2025.png" alt="IOAA India"
+                        style="width:120px;display:block;margin:0 auto 0.5rem auto;border-radius:10px;box-shadow:0 0 8px #2193b0;background:#222b3a;border:2px solid #6dd5fa;">
+                    <div>11 august – IOAA India</div>
+                </div>
+                <div class="icon-col">
+                    <img src="../images/ioaajr2025.jpg" alt="IOAAjr România"
+                        style="width:120px;display:block;margin:0 auto 0.5rem auto;border-radius:10px;box-shadow:0 0 8px #2193b0;background:#222b3a;border:2px solid #6dd5fa;">
+                    <div>18 octombrie – IOAAjr România</div>
+                </div>
+            </div>
+        </section>
+        <div style="text-align:center; margin:2rem 0;">
+            <button class="donate-btn"
+                onclick="window.open('https://www.instagram.com/astronomy_md/', '_blank');">Donează Azi — Ajută Moldova
+                să Ajungă la Stele</button>
+        </div>
+        <div class="share-message">
+            Distribuie această pagină prietenilor, profesorilor, oamenilor de știință și visătorilor.
+        </div>
+    </main>
+    <script>
+        // Starfield background
+        const canvas = document.querySelector('.stars');
+        const ctx = canvas.getContext('2d');
+        let w = window.innerWidth, h = window.innerHeight;
+        let stars = [];
+        function resize() {
+            w = window.innerWidth;
+            h = window.innerHeight;
+            canvas.width = w;
+            canvas.height = h;
+        }
+        function createStars() {
+            stars = [];
+            for (let i = 0; i < 180; i++) {
+                stars.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 1.2 + 0.3,
+                    o: Math.random() * 0.7 + 0.3,
+                    s: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+        function drawStars() {
+            ctx.clearRect(0, 0, w, h);
+            for (const star of stars) {
+                ctx.save();
+                ctx.globalAlpha = star.o;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+                ctx.shadowColor = '#6dd5fa';
+                ctx.shadowBlur = 8;
+                ctx.fillStyle = '#fff';
+                ctx.fill();
+                ctx.restore();
+                // Twinkle
+                star.o += (Math.random() - 0.5) * 0.04;
+                if (star.o < 0.3) star.o = 0.3;
+                if (star.o > 1) star.o = 1;
+            }
+        }
+        function animateStars() {
+            drawStars();
+            requestAnimationFrame(animateStars);
+        }
+        window.addEventListener('resize', () => {
+            resize();
+            createStars();
+        });
+        resize();
+        createStars();
+        animateStars();
+
+        // Carousel logic
+        const track = document.getElementById('carousel-track');
+        const items = document.querySelectorAll('.carousel-item');
+        let idx = 0;
+        function showSlide(i) {
+            idx = (i + items.length) % items.length;
+            track.style.transform = `translateX(-${idx * 100}%)`;
+        }
+        document.getElementById('carousel-prev').onclick = () => showSlide(idx - 1);
+        document.getElementById('carousel-next').onclick = () => showSlide(idx + 1);
+        // Optional: auto-slide
+        setInterval(() => showSlide(idx + 1), 7000);
+
+        // Progress bar: static value for GitHub Pages
+        const goal = 10000;
+        const raised = 251; // <--- Update this value manually for new progress
+        const percent = Math.min(100, (raised / goal) * 100);
+        document.getElementById('donation-label').innerText = `€${raised.toLocaleString()} raised of €${goal.toLocaleString()}`;
+        document.getElementById('progress-bar').style.width = percent + '%';
+        // Add last updated text
+        const lastUpdated = document.createElement('div');
+        lastUpdated.innerText = 'Last updated: 16/07/2025';
+        lastUpdated.style.fontSize = '0.95em';
+        lastUpdated.style.color = '#6dd5fa';
+        lastUpdated.style.textAlign = 'right';
+        lastUpdated.style.marginTop = '4px';
+        document.getElementById('donation-progress').appendChild(lastUpdated);
+    </script>
+</body>
+
+</html>
